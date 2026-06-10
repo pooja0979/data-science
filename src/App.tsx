@@ -1044,6 +1044,20 @@ export default function App() {
     }
   };
 
+  if (isInitialLoading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-slate-50">
+        <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-100">
+          <BarChart3 className="w-7 h-7" />
+        </div>
+        <div className="flex items-center gap-2 text-slate-500">
+          <Loader2 className="w-4 h-4 animate-spin" />
+          <span className="text-sm font-medium">Loading your data…</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -1270,10 +1284,10 @@ export default function App() {
                     <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 mb-4">
                       <Users className="w-8 h-8" />
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-1">No students found</h3>
+                    <h3 className="text-lg font-bold text-slate-900 mb-1">No students to display</h3>
                     <p className="text-sm text-slate-500 max-w-xs">
-                      We couldn't find any students matching your current filters for {selectedAcademicYear}. 
-                      Try changing the year group or uploading an Excel file.
+                      No students match the current filters for {selectedAcademicYear}.
+                      Adjust the year group, or import a CSV or Excel file to get started.
                     </p>
                     <button 
                       onClick={() => document.getElementById('file-upload')?.click()}
@@ -2195,7 +2209,7 @@ export default function App() {
                   }}
                   className="btn-primary min-w-[120px]"
                 >
-                  {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? 'Saved!' : 'Save Changes'}
+                  {saveStatus === 'saving' ? 'Saving…' : saveStatus === 'saved' ? 'Saved' : 'Save Changes'}
                 </button>
               </div>
 
@@ -2899,7 +2913,7 @@ export default function App() {
                   />
                   {importConfig.assessmentName.includes('Multiple') && (
                     <p className="text-[10px] text-indigo-600 mt-1 font-medium">
-                      ✨ Multi-assessment detected! The system will use names from your CSV.
+                      Multiple assessments detected — names will be taken from your file.
                     </p>
                   )}
                 </div>
@@ -2960,6 +2974,10 @@ export default function App() {
       </AnimatePresence>
       <footer className="bg-white border-t border-slate-200 py-6 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2 text-slate-500">
+            <BarChart3 className="w-4 h-4 text-indigo-600" />
+            <span className="text-sm font-semibold text-slate-700">Science Data Tracker</span>
+          </div>
           <p className="text-sm text-slate-500">© {new Date().getFullYear()} Pooja Arora. All rights reserved.</p>
         </div>
       </footer>
