@@ -7,3 +7,9 @@ coverage/
 .env*
 !.env.example
 firebase-applet-config.json
+
+# Local SQLite database (created at runtime by server.ts)
+data.db
+data.db-journal
+data.db-wal
+data.db-shm
